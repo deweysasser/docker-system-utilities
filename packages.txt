@@ -1,0 +1,1 @@
+vim git emacs openssl gpgv2 nload nmap tcpdump curl wget heirloom-mailx
