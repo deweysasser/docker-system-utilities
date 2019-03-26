@@ -1,1 +1,1 @@
-vim git emacs openssl gpgv2 nload nmap tcpdump curl wget heirloom-mailx
+vim git emacs openssl gpgv2 nload nmap tcpdump curl wget heirloom-mailx dnsutils iputils-ping
