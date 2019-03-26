@@ -1,5 +1,5 @@
 FROM ubuntu:xenial
 
-RUN apt-get -y update
+ADD packages.txt /root/packages.txt
 
-RUN apt-get -y install vim git emacs openssl gpgv2 nload nmap tcpdump
+RUN apt-get -y update && apt-get -y install $(cat /root/packages.txt)
