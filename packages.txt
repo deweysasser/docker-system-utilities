@@ -1,3 +1,6 @@
 vim git emacs openssl gpgv2 nload nmap tcpdump curl wget
 heirloom-mailx dnsutils iputils-ping
 awscli
+postgresql-client
+netcat
+net-tools
