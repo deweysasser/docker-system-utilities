@@ -1,0 +1,7 @@
+#!/bin/bash
+
+# Purpose:  capture the given traffic filter from all interfaces
+
+label="$(echo "$*" | tr ' ' _ | tr -d -c [a-zA-Z0-9_])"
+
+for if in $(ip a | awk '/^[0-9]+:/{print $2}' | sed -e "s/@if3://" | tr -d :); do tcpdump -i $if -w /tmp/capture-$if-$label.tcpd "$@" & done
