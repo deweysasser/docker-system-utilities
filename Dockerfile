@@ -12,6 +12,15 @@ RUN ln -s /usr/bin/kubectl-v1.14.2 /usr/bin/kubectl
 
 ADD capture-all-interfaces /usr/sbin
 
+
+# Select the docker client version
+ARG docker_url=https://download.docker.com/linux/static/stable/x86_64
+ARG docker_version=18.03.1-ce
+
+# Install just the docker CLI
+RUN curl -fsSL $docker_url/docker-$docker_version.tgz | tar zxvf - --strip 1 -C /usr/bin docker/docker
+
+
 # If we're in kubernetes, run a sleep command by default so we can exec in later.  If not, just run a shell.
 CMD sh -c "test -r /run/secrets/kubernetes.io/serviceaccount/namespace && sleep 1d || bash"
 
