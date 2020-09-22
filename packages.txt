@@ -1,6 +1,10 @@
 vim git emacs openssl gpgv2 nload nmap tcpdump curl wget
 heirloom-mailx dnsutils iputils-ping
 awscli
-postgresql-client
+postgresql-client mysql-client
 netcat
 net-tools
+traceroute
+man
+command-not-found
+redis-tools
