@@ -1,14 +1,31 @@
 FROM ubuntu:xenial
 
+# Prepare the system to be able to retrieve the google repo
+RUN apt-get update && apt-get -y install apt-transport-https ca-certificates gnupg
+
+# Fetch and install the google GPG key
+ADD https://packages.cloud.google.com/apt/doc/apt-key.gpg /root/google-key.gpg
+RUN cat /root/google-key.gpg |  apt-key --keyring /usr/share/keyrings/cloud.google.gpg add -
+
+# Now add the gogole repo
+ADD google-cloud-sdk.list /etc/apt/sources.list.d/google-cloud-sdk.list
+
+# Prep *all* the packages
 ADD packages.txt /root/packages.txt
 
+# Update (yes, again) and install all the packages
 RUN apt-get -y update && apt-get -y install $(cat /root/packages.txt)
 
-COPY --from=lachlanevenson/k8s-kubectl:v1.11.9 /usr/local/bin/kubectl /usr/bin/kubectl-v1.11.9
-COPY --from=lachlanevenson/k8s-kubectl:v1.12.9 /usr/local/bin/kubectl /usr/bin/kubectl-v1.12.9
-COPY --from=lachlanevenson/k8s-kubectl:v1.13.7 /usr/local/bin/kubectl /usr/bin/kubectl-v1.13.7
-COPY --from=lachlanevenson/k8s-kubectl:v1.14.2 /usr/local/bin/kubectl /usr/bin/kubectl-v1.14.2
-RUN ln -s /usr/bin/kubectl-v1.14.2 /usr/bin/kubectl
+# fetch a bunch of kubectl
+COPY --from=lachlanevenson/k8s-kubectl:v1.15.12 /usr/local/bin/kubectl /usr/bin/kubectl-v1.15
+COPY --from=lachlanevenson/k8s-kubectl:v1.16.15 /usr/local/bin/kubectl /usr/bin/kubectl-v1.16
+COPY --from=lachlanevenson/k8s-kubectl:v1.17.17 /usr/local/bin/kubectl /usr/bin/kubectl-v1.17
+COPY --from=lachlanevenson/k8s-kubectl:v1.18.15 /usr/local/bin/kubectl /usr/bin/kubectl-v1.18
+COPY --from=lachlanevenson/k8s-kubectl:v1.19.9 /usr/local/bin/kubectl /usr/bin/kubectl-v1.19
+COPY --from=lachlanevenson/k8s-kubectl:v1.20.5 /usr/local/bin/kubectl /usr/bin/kubectl-v1.20
+
+# Activate the latest kubectl
+RUN ln -s /usr/bin/kubectl-v1.20 /usr/bin/kubectl
 
 ADD capture-all-interfaces /usr/sbin
 

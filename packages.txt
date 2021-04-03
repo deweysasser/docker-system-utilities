@@ -8,3 +8,4 @@ traceroute
 man
 command-not-found
 redis-tools
+google-cloud-sdk
