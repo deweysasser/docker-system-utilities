@@ -20,3 +20,6 @@ Tools Included
 * vim 
 * ping
 * host
+* aws, google, and digital ocean CLIs
+* docker
+* kubectl
