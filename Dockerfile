@@ -27,9 +27,14 @@ COPY --from=lachlanevenson/k8s-kubectl:v1.20.5 /usr/local/bin/kubectl /usr/bin/k
 # Activate the latest kubectl
 RUN ln -s /usr/bin/kubectl-v1.20 /usr/bin/kubectl
 
+
+# AWS eksctl
+
+RUN curl -fsSL "https://github.com/weaveworks/eksctl/releases/latest/download/eksctl_$(uname -s)_amd64.tar.gz" \
+    | tar xz -C /usr/bin
 # doctl
 RUN curl -fsSL https://github.com/digitalocean/doctl/releases/download/v1.57.0/doctl-1.57.0-linux-amd64.tar.gz \
-    | tar xzf - -C /usr/bin
+    | tar xz -C /usr/bin
 
 ADD capture-all-interfaces /usr/sbin
 
@@ -39,7 +44,7 @@ ARG docker_url=https://download.docker.com/linux/static/stable/x86_64
 ARG docker_version=20.10.5
 
 # Install just the docker CLI
-RUN curl -fsSL $docker_url/docker-$docker_version.tgz | tar zxvf - --strip 1 -C /usr/bin docker/docker
+RUN curl -fsSL $docker_url/docker-$docker_version.tgz | tar zxv --strip 1 -C /usr/bin docker/docker
 
 
 # If we're in kubernetes, run a sleep command by default so we can exec in later.  If not, just run a shell.
