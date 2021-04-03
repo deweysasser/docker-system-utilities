@@ -27,6 +27,10 @@ COPY --from=lachlanevenson/k8s-kubectl:v1.20.5 /usr/local/bin/kubectl /usr/bin/k
 # Activate the latest kubectl
 RUN ln -s /usr/bin/kubectl-v1.20 /usr/bin/kubectl
 
+# doctl
+RUN curl -fsSL https://github.com/digitalocean/doctl/releases/download/v1.57.0/doctl-1.57.0-linux-amd64.tar.gz \
+    | tar xzf - -C /usr/bin
+
 ADD capture-all-interfaces /usr/sbin
 
 
