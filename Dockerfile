@@ -24,7 +24,8 @@ ADD google-cloud-sdk.list /etc/apt/sources.list.d/google-cloud-sdk.list
 ADD packages.txt /root/packages.txt
 
 # Update (yes, again) and install all the packages
-RUN --mount=type=cache,target=/var/cache/apt  apt-get -y update && apt-get -y install --no-install-recommends $(cat /root/packages.txt)
+RUN --mount=type=cache,target=/var/cache/apt  apt-get -y update && \
+    apt-get -y install --no-install-recommends $(sed -e '/^#/d;/^$/d' < /root/packages.txt)
 
 # fetch a bunch of kubectl
 COPY --from=lachlanevenson/k8s-kubectl:v1.15.12 /usr/local/bin/kubectl /usr/bin/kubectl-v1.15

@@ -1,12 +1,35 @@
-vim git emacs openssl gpgv2 nload nmap tcpdump curl wget
-dnsutils iputils-ping
-mailutils
-awscli
-postgresql-client mysql-client
-netcat
-net-tools
-traceroute
-man
+# system
 command-not-found
-redis-tools
+curl
+emacs
+git
+gpgv2
+mailutils
+man
+openssl
+vim
+wget
+
+# Performance
+sysstat
+
+
+# network
+dnsutils
+iputils-ping
+net-tools
+netcat
+nload
+nmap
+tcpdump
+traceroute
+
+# cloud
+awscli
 google-cloud-sdk
+
+# database
+postgresql-client
+mysql-client
+redis-tools
+
