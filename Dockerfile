@@ -1,5 +1,5 @@
-FROM ubuntu:xenial
-
+FROM ubuntu:focal
+ENV DEBIAN_FRONTEND=noninteractive
 # Prepare the system to be able to retrieve the google repo
 RUN apt-get update && apt-get -y install apt-transport-https ca-certificates gnupg
 

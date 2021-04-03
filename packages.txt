@@ -1,5 +1,6 @@
 vim git emacs openssl gpgv2 nload nmap tcpdump curl wget
-heirloom-mailx dnsutils iputils-ping
+dnsutils iputils-ping
+mailutils
 awscli
 postgresql-client mysql-client
 netcat
