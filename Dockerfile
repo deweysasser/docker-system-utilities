@@ -36,7 +36,7 @@ ADD capture-all-interfaces /usr/sbin
 
 # Select the docker client version
 ARG docker_url=https://download.docker.com/linux/static/stable/x86_64
-ARG docker_version=18.03.1-ce
+ARG docker_version=20.10.5
 
 # Install just the docker CLI
 RUN curl -fsSL $docker_url/docker-$docker_version.tgz | tar zxvf - --strip 1 -C /usr/bin docker/docker
