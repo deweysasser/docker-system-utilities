@@ -2,7 +2,7 @@
 
 
 # Collect up all the files from other containers/downloads, so we can put them in as a single layer
-FROM ubuntu:focal as collector
+FROM ubuntu:groovy-20210416 as collector
 # Select the docker client version
 ENV DEBIAN_FRONTEND=noninteractive
 
@@ -34,7 +34,7 @@ RUN ln -s kubectl-v1.20 bin/kubectl
 
 
 ###################################################################################
-FROM ubuntu:focal
+FROM ubuntu:groovy-20210416
 ARG DEBIAN_FRONTEND=noninteractive
 
 # Prepare the system to be able to retrieve the google repo
