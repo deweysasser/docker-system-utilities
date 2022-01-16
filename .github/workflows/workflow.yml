@@ -3,6 +3,16 @@ on: [push]
 jobs:
   build:
     runs-on: ubuntu-latest
+    env:
+      TARGET: deweysasser/tools:testing
     steps:
       - uses: actions/checkout@v2
-      - run: docker build .
+      - run: docker build -t ${{env.TARGET}} .
+        name: build
+      - name: Log in to Docker Hub
+        uses: docker/login-action@f054a8b539a109f9f41c372932f1ae047eff08c9
+        with:
+          username: ${{ secrets.DOCKER_HUB_USER }}
+          password: ${{ secrets.DOCKER_HUB_PAT }}
+      - run: docker push ${{env.TARGET}}
+        name: push
