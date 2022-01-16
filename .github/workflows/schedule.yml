@@ -1,13 +1,17 @@
-name: Docker build
-on: [push]
+name: Scheduled jobs
+on:
+  schedule:
+    - cron: '0 4 * * 0'
 jobs:
   build:
     runs-on: ubuntu-latest
     env:
       TARGET: deweysasser/tools
-      TAG: testing
+      TAG: latest
     steps:
       - uses: actions/checkout@v2
+        with:
+          ref: main
       - run: docker build -t ${{env.TARGET}}:${{env.TAG}} .
         name: build
         env:
