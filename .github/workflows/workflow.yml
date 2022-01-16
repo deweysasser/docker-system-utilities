@@ -7,15 +7,40 @@ jobs:
       TARGET: deweysasser/tools
       TAG: testing
     steps:
+      - name: Log in to Docker Hub
+        uses: docker/login-action@v1
+        with:
+          username: ${{ secrets.DOCKER_HUB_USER }}
+          password: ${{ secrets.DOCKER_HUB_PAT }}
+
+      - name: Log in to github registry
+        uses: docker/login-action@v1
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
       - uses: actions/checkout@v2
+
       - run: docker build -t ${{env.TARGET}}:${{env.TAG}} .
         name: build
         env:
           DOCKER_BUILDKIT: 1
-      - name: Log in to Docker Hub
-        uses: docker/login-action@f054a8b539a109f9f41c372932f1ae047eff08c9
-        with:
-          username: ${{ secrets.DOCKER_HUB_USER }}
-          password: ${{ secrets.DOCKER_HUB_PAT }}
+
       - run: docker push ${{env.TARGET}}:${{env.TAG}}
-        name: push
+        name: push to hub.docker.com
+
+      - run: docker tag ${{env.TARGET}}:${{env.TAG}}  ghcr.io/${{env.TARGET}}:${{env.TAG}}
+
+      - run: docker push ghcr.io/${{env.TARGET}}:${{env.TAG}}
+        name: push to ghcr.io
+
+
+
+#      - name: Build and push Docker images
+#        uses: docker/build-push-action@v1
+#        with:
+#          context: .
+#          push: true
+#          tags: ${{ env.TAG }}
+#          labels: ${{ steps.meta.outputs.labels }}
