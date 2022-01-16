@@ -4,10 +4,11 @@ jobs:
   build:
     runs-on: ubuntu-latest
     env:
-      TARGET: deweysasser/tools:testing
+      TARGET: deweysasser/tools
+      TAG: testing
     steps:
       - uses: actions/checkout@v2
-      - run: docker build -t ${{env.TARGET}} .
+      - run: docker build -t ${{env.TARGET}}:${{env.TAG}} .
         name: build
         env:
           DOCKER_BUILDKIT: 1
@@ -16,5 +17,5 @@ jobs:
         with:
           username: ${{ secrets.DOCKER_HUB_USER }}
           password: ${{ secrets.DOCKER_HUB_PAT }}
-      - run: docker push ${{env.TARGET}}
+      - run: docker push ${{env.TARGET}}:${{env.TAG}}
         name: push
