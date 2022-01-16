@@ -31,16 +31,8 @@ jobs:
         name: push to hub.docker.com
 
       - run: docker tag ${{env.TARGET}}:${{env.TAG}}  ghcr.io/${{env.TARGET}}:${{env.TAG}}
+        name: retagging
 
       - run: docker push ghcr.io/${{env.TARGET}}:${{env.TAG}}
         name: push to ghcr.io
 
-
-
-#      - name: Build and push Docker images
-#        uses: docker/build-push-action@v1
-#        with:
-#          context: .
-#          push: true
-#          tags: ${{ env.TAG }}
-#          labels: ${{ steps.meta.outputs.labels }}
