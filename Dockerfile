@@ -7,7 +7,7 @@ FROM ubuntu:20.04 as collector
 ENV DEBIAN_FRONTEND=noninteractive
 
 ARG docker_url=https://download.docker.com/linux/static/stable/x86_64
-ARG docker_version=20.10.5
+ARG docker_version=20.10.17
 
 
 WORKDIR /root
@@ -17,8 +17,11 @@ COPY --from=lachlanevenson/k8s-kubectl:v1.15.12 /usr/local/bin/kubectl bin/kubec
 COPY --from=lachlanevenson/k8s-kubectl:v1.16.15 /usr/local/bin/kubectl bin/kubectl-v1.16
 COPY --from=lachlanevenson/k8s-kubectl:v1.17.17 /usr/local/bin/kubectl bin/kubectl-v1.17
 COPY --from=lachlanevenson/k8s-kubectl:v1.18.15 /usr/local/bin/kubectl bin/kubectl-v1.18
-COPY --from=lachlanevenson/k8s-kubectl:v1.19.9 /usr/local/bin/kubectl bin/kubectl-v1.19
-COPY --from=lachlanevenson/k8s-kubectl:v1.20.5 /usr/local/bin/kubectl bin/kubectl-v1.20
+COPY --from=lachlanevenson/k8s-kubectl:v1.19.9  /usr/local/bin/kubectl bin/kubectl-v1.19
+COPY --from=lachlanevenson/k8s-kubectl:v1.20.5  /usr/local/bin/kubectl bin/kubectl-v1.20
+COPY --from=lachlanevenson/k8s-kubectl:v1.21.12 /usr/local/bin/kubectl bin/kubectl-v1.21
+COPY --from=lachlanevenson/k8s-kubectl:v1.22.9  /usr/local/bin/kubectl bin/kubectl-v1.22
+COPY --from=lachlanevenson/k8s-kubectl:v1.23.6  /usr/local/bin/kubectl bin/kubectl-v1.23
 
 # bunch of cloud tools
 
