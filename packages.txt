@@ -23,6 +23,8 @@ nload
 nmap
 tcpdump
 traceroute
+ethtool
+iproute2
 
 # cloud
 awscli
