@@ -25,6 +25,7 @@ tcpdump
 traceroute
 ethtool
 iproute2
+stunnel
 
 # cloud
 awscli
